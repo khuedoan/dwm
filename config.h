@@ -59,6 +59,9 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[]  = { "firefox", NULL };
+static const char *volup[]   = { "amixer", "-q", "set", "Master", "10%+",   NULL };
+static const char *voldown[] = { "amixer", "-q", "set", "Master", "10%-",   NULL };
+static const char *volmute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -96,6 +99,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ControlMask,           XK_q,      quit,           {0} },
+	{ MODKEY|ControlMask,           XK_equal,  spawn,          {.v = volup} },
+	{ MODKEY|ControlMask,           XK_minus,  spawn,          {.v = voldown} },
+	{ MODKEY|ControlMask,           XK_0,      spawn,          {.v = volmute} },
 };
 
 /* button definitions */
